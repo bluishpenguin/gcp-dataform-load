@@ -1,0 +1,15 @@
+config {
+    type: "operations",
+    hasOutput: true,
+    name: "order_item_raw"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE
+  ${self()} ( order_item_id INT64,
+    order_id INT64,
+    menu_id INT64,
+    quantity INT64,
+    item_price FLOAT64,
+    item_total FLOAT64 ) OPTIONS ( format = 'CSV',
+    uris = ['gs://${constants.GCS.bucket}/${constants.GCS.rootPath}/order_item.csv'],
+    skip_leading_rows = 1 );

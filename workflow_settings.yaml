@@ -1,0 +1,8 @@
+defaultProject: nova-coder-04
+defaultDataset: coffee_on_wheels_raw
+defaultAssertionDataset: dataform_assertions
+dataformCoreVersion: 3.0.37
+
+vars:
+  # ${dataform.projectConfig.vars.client}
+  client: "nova-coder-04"

@@ -1,0 +1,11 @@
+config {
+    type: "assertion",
+    description: "Fails if any order_id is NULL in the external CSV"
+}
+
+SELECT
+  *
+FROM
+  ${ref("order_raw")}
+WHERE
+  order_id IS NULL

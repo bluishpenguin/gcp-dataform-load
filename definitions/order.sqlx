@@ -1,0 +1,14 @@
+config {
+    type: "operations",
+    hasOutput: true,
+    name: "order_raw"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE
+  ${self()} ( order_id INT64,
+    location_id INT64,
+    customer_id INT64,
+    order_datetime TIMESTAMP,
+    order_completion_datetime TIMESTAMP ) OPTIONS ( format = 'CSV',
+    uris = ['gs://${constants.GCS.bucket}/${constants.GCS.rootPath}/order.csv'],
+    skip_leading_rows = 1 );
