@@ -1,0 +1,38 @@
+config {
+    type: "assertion",
+    description: "Ensures the external tables are not empty and are reachable"
+}
+
+  -- This query should return 0 rows to pass.
+  -- We look for cases where the count is 0 (table is empty or unreachable).
+SELECT
+  'location' AS table_name,
+  COUNT(*) AS row_count
+FROM
+  ${ref("location_raw")}
+HAVING
+  row_count = 0
+UNION ALL
+SELECT
+  'menu' AS table_name,
+  COUNT(*) AS row_count
+FROM
+  ${ref("menu_raw")}
+HAVING
+  row_count = 0
+UNION ALL
+SELECT
+  'order' AS table_name,
+  COUNT(*) AS row_count
+FROM
+  ${ref("order_raw")}
+HAVING
+  row_count = 0
+UNION ALL
+SELECT
+  'order_item' AS table_name,
+  COUNT(*) AS row_count
+FROM
+  ${ref("order_item_raw")}
+HAVING
+  row_count = 0

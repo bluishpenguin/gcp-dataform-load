@@ -1,0 +1,15 @@
+config {
+    type: "operations",
+    hasOutput: true,
+    name: "menu_raw"
+}
+
+CREATE OR REPLACE EXTERNAL TABLE
+  ${self()} ( menu_id INT64,
+    company_id INT64,
+    item_name STRING,
+    item_price FLOAT64,
+    item_description STRING,
+    item_size STRING ) OPTIONS ( format = 'CSV',
+    uris = ['gs://${constants.GCS.bucket}/${constants.GCS.rootPath}/menu.csv'],
+    skip_leading_rows = 1 );
